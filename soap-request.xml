@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:usr="http://freelancehub.com/users">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <usr:registerUserRequest>
+            <usr:name>Sai</usr:name>
+            <usr:email>sai@gmail.com</usr:email>
+            <usr:password>12345</usr:password>
+            <usr:role>FREELANCER</usr:role>
+            <usr:experience>2</usr:experience>
+            <usr:rating>4.5</usr:rating>
+        </usr:registerUserRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

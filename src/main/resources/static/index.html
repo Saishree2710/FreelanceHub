@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FreelanceHub</title>
+
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Find Work</a>
+            <a href="#">Find Freelancers</a>
+            <a href="#">About</a>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="login-btn" id="loginBtn">Login</button>
+            <button class="register-btn" id="getStartedBtn">Get Started</button>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="tagline">
+                YOUR WORK. YOUR TALENT. YOUR FUTURE.
+            </p>
+
+            <h1>
+                Where great work<br>
+                <span>meets great talent.</span>
+            </h1>
+
+            <p class="hero-text">
+                FreelanceHub connects clients with skilled freelancers
+                to turn ideas into reality.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="primary-btn">
+                    Find Freelancers
+                </button>
+
+                <button class="secondary-btn">
+                    Find Projects
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- Hero Card -->
+        <div class="hero-card">
+
+            <div class="card-top">
+                <span>🔥 Trending Project</span>
+                <span>₹40,000</span>
+            </div>
+
+            <h3>
+                E-Commerce Website Development
+            </h3>
+
+            <p>
+                Looking for an experienced developer to build
+                a modern online store.
+            </p>
+
+            <div class="skills">
+                <span>Java</span>
+                <span>MySQL</span>
+                <span>React</span>
+            </div>
+
+            <div class="card-bottom">
+                <span>5 Proposals</span>
+                <button>View Project →</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features Section -->
+    <section class="features">
+
+        <div class="section-heading">
+            <p>WHY FREELANCEHUB?</p>
+            <h2>Everything you need to work better.</h2>
+        </div>
+
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+
+                <h3>Find Projects</h3>
+
+                <p>
+                    Discover projects that match your skills,
+                    experience and interests.
+                </p>
+            </div>
+
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+
+                <h3>Find Talent</h3>
+
+                <p>
+                    Connect with skilled freelancers
+                    who can bring your project to life.
+                </p>
+            </div>
+
+
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+
+                <h3>Build Your Reputation</h3>
+
+                <p>
+                    Complete projects, earn ratings and
+                    grow your freelance career.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Register Section -->
+    <section class="register-section">
+
+        <div class="register-container" id="register">
+
+            <div class="register-info">
+                <p class="tagline">JOIN FREELANCEHUB</p>
+
+                <h2>Turn your skills into opportunities.</h2>
+
+                <p>
+                    Create your FreelanceHub account and start
+                    connecting with clients and projects.
+                </p>
+            </div>
+
+
+            <div class="register-card">
+
+                <h2>Create Account</h2>
+
+                <p class="form-subtitle">
+                    Fill in your details to get started.
+                </p>
+
+                <form id="registerForm">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="role">Role</label>
+
+                        <select id="role" required>
+                            <option value="">Select your role</option>
+                            <option value="CLIENT">Client</option>
+                            <option value="FREELANCER">Freelancer</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="skills">Skills</label>
+
+                        <input
+                            type="text"
+                            id="skills"
+                            placeholder="e.g. Java, Spring Boot, MySQL"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="experience">Experience</label>
+
+                            <input
+                                type="number"
+                                id="experience"
+                                min="0"
+                                placeholder="Years"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+
+                            <input
+                                type="number"
+                                id="rating"
+                                min="0"
+                                max="5"
+                                step="0.1"
+                                value="0"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="register-submit">
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <div id="registerMessage"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Login Section -->
+    <section class="register-section" id="login">
+
+        <div class="register-container">
+
+            <div class="register-info">
+                <p class="tagline">WELCOME BACK</p>
+
+                <h2>Ready to get back to work?</h2>
+
+                <p>
+                    Login to your FreelanceHub account and
+                    continue connecting with clients and talent.
+                </p>
+            </div>
+
+
+            <div class="register-card">
+
+                <h2>Login</h2>
+
+                <p class="form-subtitle">
+                    Enter your email and password.
+                </p>
+
+                <form id="loginForm">
+
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+
+
+                    <button type="submit" class="register-submit">
+                        Login
+                    </button>
+
+                </form>
+
+
+                <div id="loginMessage"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <p>
+            Find talent. Build projects. Grow together.
+        </p>
+
+    </footer>
+
+</body>
+</html>
