@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Freelancer Dashboard - FreelanceHub</title>
+
+    <link rel="stylesheet" href="/style.css?v=4">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="freelancer-dashboard.html">Dashboard</a>
+            <a href="#">Find Projects</a>
+            <a href="#">My Applications</a>
+            <a href="#">Messages</a>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="login-btn" onclick="logout()">
+                Logout
+            </button>
+        </div>
+
+    </nav>
+
+
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+
+        <div class="dashboard-content">
+
+            <p class="tagline">
+                FREELANCER DASHBOARD
+            </p>
+
+            <h1>
+                Turn your skills<br>
+                <span>into opportunities.</span>
+            </h1>
+
+            <p class="hero-text">
+                Discover projects that match your skills,
+                build your reputation and grow your freelance career.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <p>YOUR WORKSPACE</p>
+
+            <h2>
+                What would you like to do?
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-container">
+
+            <!-- Find Projects -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Find Projects
+                </h3>
+
+                <p>
+                    Discover projects that match your skills,
+                    experience and interests.
+                </p>
+
+                <button class="primary-btn" onclick="findProjects()">
+                    Find Projects →
+                </button>
+
+            </div>
+
+
+            <!-- My Applications -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    📋
+                </div>
+
+                <h3>
+                    My Applications
+                </h3>
+
+                <p>
+                    Track the projects you have applied for
+                    and manage your freelance opportunities.
+                </p>
+
+                <button class="secondary-btn" onclick="viewApplications()">
+                    View Applications →
+                </button>
+
+            </div>
+
+
+            <!-- My Profile -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    ⭐
+                </div>
+
+                <h3>
+                    My Profile
+                </h3>
+
+                <p>
+                    Manage your skills, experience and rating
+                    to attract better opportunities.
+                </p>
+
+                <button class="secondary-btn" onclick="viewProfile()">
+                    View Profile →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <p>
+            Find talent. Build projects. Grow together.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function findProjects() {
+
+            alert("Find Projects feature coming next!");
+
+        }
+
+
+        function viewApplications() {
+
+            alert("My Applications feature coming next!");
+
+        }
+
+
+        function viewProfile() {
+
+            alert("My Profile feature coming next!");
+
+        }
+
+
+        function logout() {
+
+            localStorage.clear();
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

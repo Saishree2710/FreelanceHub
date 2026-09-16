@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Freelancers - FreelanceHub</title>
+
+    <link rel="stylesheet" href="/style.css?v=5">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="client-dashboard.html">Dashboard</a>
+            <a href="search-freelancers.html">Search Freelancers</a>
+            <a href="#">Messages</a>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="login-btn" onclick="logout()">
+                Logout
+            </button>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <section class="search-hero">
+
+        <div class="search-hero-content">
+
+            <p class="tagline">
+                FIND YOUR TALENT
+            </p>
+
+            <h1>
+                Find the right<br>
+                <span>freelancer.</span>
+            </h1>
+
+            <p>
+                Search skilled freelancers based on their
+                expertise, experience and ratings.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH SECTION
+    ========================== -->
+
+    <section class="freelancer-search-section">
+
+        <div class="search-container">
+
+            <div class="search-heading">
+
+                <p>SEARCH FREELANCERS</p>
+
+                <h2>
+                    Who are you looking for?
+                </h2>
+
+            </div>
+
+
+            <!-- =========================
+                 SEARCH BOX
+            ========================== -->
+
+            <div class="search-box">
+
+                <div class="search-field">
+
+                    <label for="skillSearch">
+                        Skill
+                    </label>
+
+                    <input
+                        type="text"
+                        id="skillSearch"
+                        placeholder="e.g. Java, Python, React..."
+                    >
+
+                </div>
+
+
+                <div class="search-field">
+
+                    <label for="experienceFilter">
+                        Minimum Experience
+                    </label>
+
+                    <select id="experienceFilter">
+
+                        <option value="0">
+                            Any experience
+                        </option>
+
+                        <option value="1">
+                            1+ years
+                        </option>
+
+                        <option value="2">
+                            2+ years
+                        </option>
+
+                        <option value="3">
+                            3+ years
+                        </option>
+
+                        <option value="5">
+                            5+ years
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="search-field">
+
+                    <label for="ratingFilter">
+                        Minimum Rating
+                    </label>
+
+                    <select id="ratingFilter">
+
+                        <option value="0">
+                            Any rating
+                        </option>
+
+                        <option value="3">
+                            3+ ⭐
+                        </option>
+
+                        <option value="4">
+                            4+ ⭐
+                        </option>
+
+                        <option value="4.5">
+                            4.5+ ⭐
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="primary-btn search-button"
+                    onclick="searchFreelancers()"
+                >
+                    Search →
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 RESULTS
+            ========================== -->
+
+            <div class="results-heading">
+
+                <h2>
+                    Available Freelancers
+                </h2>
+
+                <p id="resultMessage">
+                    Search to find freelancers.
+                </p>
+
+            </div>
+
+
+            <div
+                class="freelancer-results"
+                id="freelancerResults"
+            >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <p>
+            Find talent. Build projects. Grow together.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        async function searchFreelancers() {
+
+            const skill =
+                document.getElementById("skillSearch").value.trim();
+
+            const experience =
+                document.getElementById("experienceFilter").value;
+
+            const rating =
+                document.getElementById("ratingFilter").value;
+
+
+            const resultMessage =
+                document.getElementById("resultMessage");
+
+            const resultsContainer =
+                document.getElementById("freelancerResults");
+
+
+            resultMessage.textContent =
+                "Searching freelancers...";
+
+            resultsContainer.innerHTML = "";
+
+
+            // =========================
+            // SOAP REQUEST
+            // =========================
+
+            const soapRequest =
+                `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                                  xmlns:usr="http://freelancehub.com/users">
+
+                    <soapenv:Header/>
+
+                    <soapenv:Body>
+
+                        <usr:searchFreelancersRequest>
+
+                            <usr:skill>${escapeXml(skill)}</usr:skill>
+
+                            <usr:minExperience>${experience}</usr:minExperience>
+
+                            <usr:minRating>${rating}</usr:minRating>
+
+                        </usr:searchFreelancersRequest>
+
+                    </soapenv:Body>
+
+                </soapenv:Envelope>`;
+
+
+            console.log("Sending freelancer search request:");
+            console.log(soapRequest);
+
+
+            try {
+
+                const response = await fetch("/ws", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "text/xml; charset=utf-8"
+                    },
+
+                    body: soapRequest
+
+                });
+
+
+                const responseText =
+                    await response.text();
+
+
+                console.log("SOAP search response:");
+                console.log(responseText);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Search request failed. HTTP status: " +
+                        response.status
+                    );
+
+                }
+
+
+                // =========================
+                // PARSE SOAP RESPONSE
+                // =========================
+
+                const parser =
+                    new DOMParser();
+
+                const xml =
+                    parser.parseFromString(
+                        responseText,
+                        "text/xml"
+                    );
+
+
+                const freelancerNodes =
+                    xml.getElementsByTagNameNS(
+                        "http://freelancehub.com/users",
+                        "freelancers"
+                    );
+
+
+                resultsContainer.innerHTML = "";
+
+
+                // =========================
+                // NO RESULTS
+                // =========================
+
+                if (freelancerNodes.length === 0) {
+
+                    resultMessage.textContent =
+                        "No freelancers found matching your search.";
+
+                    return;
+
+                }
+
+
+                // =========================
+                // DISPLAY RESULTS
+                // =========================
+
+                resultMessage.textContent =
+                    freelancerNodes.length +
+                    " freelancer(s) found.";
+
+
+                for (
+                    let i = 0;
+                    i < freelancerNodes.length;
+                    i++
+                ) {
+
+                    const freelancer =
+                        freelancerNodes[i];
+
+
+                    const id =
+                        getXmlValue(
+                            freelancer,
+                            "id"
+                        );
+
+                    const name =
+                        getXmlValue(
+                            freelancer,
+                            "name"
+                        );
+
+                    const email =
+                        getXmlValue(
+                            freelancer,
+                            "email"
+                        );
+
+                    const skills =
+                        getXmlValue(
+                            freelancer,
+                            "skills"
+                        );
+
+                    const experience =
+                        getXmlValue(
+                            freelancer,
+                            "experience"
+                        );
+
+                    const rating =
+                        getXmlValue(
+                            freelancer,
+                            "rating"
+                        );
+
+
+                    createFreelancerCard(
+                        id,
+                        name,
+                        email,
+                        skills,
+                        experience,
+                        rating
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Freelancer search error:",
+                    error
+                );
+
+
+                resultMessage.textContent =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+
+        // =========================
+        // GET XML VALUE
+        // =========================
+
+        function getXmlValue(parent, tagName) {
+
+            const element =
+                parent.getElementsByTagNameNS(
+                    "http://freelancehub.com/users",
+                    tagName
+                )[0];
+
+
+            if (element) {
+
+                return element.textContent;
+
+            }
+
+
+            return "";
+
+        }
+
+
+        // =========================
+        // CREATE FREELANCER CARD
+        // =========================
+
+        function createFreelancerCard(
+            id,
+            name,
+            email,
+            skills,
+            experience,
+            rating
+        ) {
+
+            const resultsContainer =
+                document.getElementById(
+                    "freelancerResults"
+                );
+
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "freelancer-card";
+
+
+            card.innerHTML = `
+
+                <div class="freelancer-card-header">
+
+                    <div class="freelancer-avatar">
+                        ${name.charAt(0).toUpperCase()}
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ${escapeHtml(name)}
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(email)}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="freelancer-details">
+
+                    <div class="detail-item">
+
+                        <span>
+                            Experience
+                        </span>
+
+                        <strong>
+                            ${experience} years
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Rating
+                        </span>
+
+                        <strong>
+                            ⭐ ${rating}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="freelancer-skills">
+
+                    ${createSkillTags(skills)}
+
+                </div>
+
+
+                <button
+                    class="primary-btn freelancer-profile-btn"
+                    onclick="viewFreelancer(${id})"
+                >
+                    View Profile →
+                </button>
+
+            `;
+
+
+            resultsContainer.appendChild(card);
+
+        }
+
+
+        // =========================
+        // CREATE SKILL TAGS
+        // =========================
+
+        function createSkillTags(skills) {
+
+            if (!skills) {
+
+                return "";
+
+            }
+
+
+            const skillList =
+                skills.split(",");
+
+
+            return skillList
+                .map(function(skill) {
+
+                    return `
+                        <span>
+                            ${escapeHtml(skill.trim())}
+                        </span>
+                    `;
+
+                })
+                .join("");
+
+        }
+
+
+        // =========================
+        // VIEW FREELANCER
+        // =========================
+
+        function viewFreelancer(id) {
+
+            alert(
+                "Freelancer profile coming next!\nUser ID: " +
+                id
+            );
+
+        }
+
+
+        // =========================
+        // LOGOUT
+        // =========================
+
+        function logout() {
+
+            localStorage.clear();
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        // =========================
+        // XML ESCAPING
+        // =========================
+
+        function escapeXml(value) {
+
+            return value
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&apos;");
+
+        }
+
+
+        // =========================
+        // HTML ESCAPING
+        // =========================
+
+        function escapeHtml(value) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = value;
+
+            return div.innerHTML;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

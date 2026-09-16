@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Client Dashboard - FreelanceHub</title>
+
+    <link rel="stylesheet" href="/style.css?v=4">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="client-dashboard.html">Dashboard</a>
+            <a href="#">Messages</a>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="login-btn" onclick="logout()">
+                Logout
+            </button>
+        </div>
+
+    </nav>
+
+
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+
+        <div class="dashboard-content">
+
+            <p class="tagline">
+                CLIENT DASHBOARD
+            </p>
+
+            <h1>
+                Find the right talent<br>
+                <span>for your next project.</span>
+            </h1>
+
+            <p class="hero-text">
+                Discover skilled freelancers, compare their experience
+                and find the perfect person to bring your ideas to life.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <p>WHAT DO YOU WANT TO DO?</p>
+
+            <h2>
+                Find the talent you need.
+            </h2>
+
+        </div>
+
+
+        <div class="dashboard-container">
+
+            <!-- Search Freelancers -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Search Freelancers
+                </h3>
+
+                <p>
+                    Find talented freelancers based on their
+                    skills, experience and ratings.
+                </p>
+
+                <button class="primary-btn" onclick="searchFreelancers()">
+                    Search Freelancers →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            Freelance<span>Hub</span>
+        </div>
+
+        <p>
+            Find talent. Build projects. Grow together.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function searchFreelancers() {
+
+            window.location.href = "search-freelancers.html";
+
+        }
+
+
+        function logout() {
+
+            localStorage.clear();
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

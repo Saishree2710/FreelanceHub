@@ -41,4 +41,21 @@ public class UserService {
 
         return Optional.empty();
     }
+
+
+    // =========================
+    // SEARCH FREELANCERS
+    // =========================
+
+    public List<User> searchFreelancers(
+            String skill,
+            int minExperience,
+            double minRating) {
+
+        return userRepository.searchFreelancers(
+                skill,
+                minExperience,
+                minRating
+        );
+    }
 }

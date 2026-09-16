@@ -1,5 +1,7 @@
 package com.freelancehub.freelancehub.endpoint;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -21,6 +23,11 @@ public class UserEndpoint {
     public UserEndpoint(UserService userService) {
         this.userService = userService;
     }
+
+
+    // =========================
+    // REGISTER USER
+    // =========================
 
     @PayloadRoot(
             namespace = NAMESPACE,
@@ -55,6 +62,10 @@ public class UserEndpoint {
     }
 
 
+    // =========================
+    // LOGIN USER
+    // =========================
+
     @PayloadRoot(
             namespace = NAMESPACE,
             localPart = "loginUserRequest"
@@ -88,6 +99,55 @@ public class UserEndpoint {
             response.setSuccess(false);
             response.setMessage("Invalid email or password");
         }
+
+        return response;
+    }
+
+
+    // =========================
+    // SEARCH FREELANCERS
+    // =========================
+
+    @PayloadRoot(
+            namespace = NAMESPACE,
+            localPart = "searchFreelancersRequest"
+    )
+    @ResponsePayload
+    public SearchFreelancersResponse searchFreelancers(
+            @RequestPayload SearchFreelancersRequest request) {
+
+        List<User> users =
+                userService.searchFreelancers(
+                        request.getSkill(),
+                        request.getMinExperience(),
+                        request.getMinRating()
+                );
+
+
+        List<FreelancerResult> results =
+                new ArrayList<>();
+
+
+        for (User user : users) {
+
+            FreelancerResult freelancer =
+                    new FreelancerResult(
+                            user.getId(),
+                            user.getName(),
+                            user.getEmail(),
+                            user.getSkills(),
+                            user.getExperience(),
+                            user.getRating()
+                    );
+
+            results.add(freelancer);
+        }
+
+
+        SearchFreelancersResponse response =
+                new SearchFreelancersResponse();
+
+        response.setFreelancers(results);
 
         return response;
     }

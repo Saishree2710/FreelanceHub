@@ -164,7 +164,11 @@ loginForm.addEventListener("submit", async function (event) {
 
         }
 
-        // Check for successful login
+
+        // =========================
+        // LOGIN SUCCESS
+        // =========================
+
         if (responseText.includes("success>true")) {
 
             const nameMatch =
@@ -173,11 +177,25 @@ loginForm.addEventListener("submit", async function (event) {
             const roleMatch =
                 responseText.match(/<[^>]*role>(.*?)<\/[^>]*role>/);
 
+            const idMatch =
+                responseText.match(/<[^>]*id>(.*?)<\/[^>]*id>/);
+
             const name =
                 nameMatch ? nameMatch[1] : "";
 
             const role =
                 roleMatch ? roleMatch[1] : "";
+
+            const id =
+                idMatch ? idMatch[1] : "";
+
+
+            // Store logged-in user information
+            localStorage.setItem("userId", id);
+            localStorage.setItem("userName", name);
+            localStorage.setItem("userRole", role);
+            localStorage.setItem("userEmail", email);
+
 
             loginMessage.textContent =
                 "Login successful! Welcome " +
@@ -186,7 +204,32 @@ loginForm.addEventListener("submit", async function (event) {
                 role +
                 ")";
 
+
+            // Redirect based on role
+            setTimeout(function () {
+
+                if (role === "CLIENT") {
+
+                    window.location.href =
+                        "client-dashboard.html";
+
+                } else if (role === "FREELANCER") {
+
+                    window.location.href =
+                        "freelancer-dashboard.html";
+
+                } else {
+
+                    loginMessage.textContent =
+                        "Login successful, but role is unknown.";
+
+                }
+
+            }, 1000);
+
+
             loginForm.reset();
+
 
         } else {
 

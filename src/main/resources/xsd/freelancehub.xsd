@@ -6,10 +6,15 @@
         targetNamespace="http://freelancehub.com/users"
         elementFormDefault="qualified">
 
-    <!-- REGISTER USER -->
+
+    <!-- =========================
+         REGISTER USER
+    ========================== -->
 
     <xs:element name="registerUserRequest">
+
         <xs:complexType>
+
             <xs:sequence>
 
                 <xs:element name="name" type="xs:string"/>
@@ -27,12 +32,16 @@
                 <xs:element name="rating" type="xs:double"/>
 
             </xs:sequence>
+
         </xs:complexType>
+
     </xs:element>
 
 
     <xs:element name="registerUserResponse">
+
         <xs:complexType>
+
             <xs:sequence>
 
                 <xs:element name="id" type="xs:long"/>
@@ -46,14 +55,20 @@
                 <xs:element name="message" type="xs:string"/>
 
             </xs:sequence>
+
         </xs:complexType>
+
     </xs:element>
 
 
-    <!-- LOGIN USER -->
+    <!-- =========================
+         LOGIN USER
+    ========================== -->
 
     <xs:element name="loginUserRequest">
+
         <xs:complexType>
+
             <xs:sequence>
 
                 <xs:element name="email" type="xs:string"/>
@@ -61,28 +76,132 @@
                 <xs:element name="password" type="xs:string"/>
 
             </xs:sequence>
+
         </xs:complexType>
+
     </xs:element>
 
 
     <xs:element name="loginUserResponse">
+
         <xs:complexType>
+
             <xs:sequence>
 
-                <xs:element name="success" type="xs:boolean"/>
+                <xs:element
+                        name="success"
+                        type="xs:boolean"/>
 
-                <xs:element name="id" type="xs:long" minOccurs="0"/>
+                <xs:element
+                        name="id"
+                        type="xs:long"
+                        minOccurs="0"/>
 
-                <xs:element name="name" type="xs:string" minOccurs="0"/>
+                <xs:element
+                        name="name"
+                        type="xs:string"
+                        minOccurs="0"/>
 
-                <xs:element name="email" type="xs:string" minOccurs="0"/>
+                <xs:element
+                        name="email"
+                        type="xs:string"
+                        minOccurs="0"/>
 
-                <xs:element name="role" type="xs:string" minOccurs="0"/>
+                <xs:element
+                        name="role"
+                        type="xs:string"
+                        minOccurs="0"/>
 
-                <xs:element name="message" type="xs:string"/>
+                <xs:element
+                        name="message"
+                        type="xs:string"/>
 
             </xs:sequence>
+
         </xs:complexType>
+
     </xs:element>
+
+
+    <!-- =========================
+         SEARCH FREELANCERS
+    ========================== -->
+
+    <xs:element name="searchFreelancersRequest">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element
+                        name="skill"
+                        type="xs:string"/>
+
+                <xs:element
+                        name="minExperience"
+                        type="xs:int"/>
+
+                <xs:element
+                        name="minRating"
+                        type="xs:double"/>
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+
+    <xs:element name="searchFreelancersResponse">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element
+                        name="freelancers"
+                        minOccurs="0"
+                        maxOccurs="unbounded">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element
+                                    name="id"
+                                    type="xs:long"/>
+
+                            <xs:element
+                                    name="name"
+                                    type="xs:string"/>
+
+                            <xs:element
+                                    name="email"
+                                    type="xs:string"/>
+
+                            <xs:element
+                                    name="skills"
+                                    type="xs:string"/>
+
+                            <xs:element
+                                    name="experience"
+                                    type="xs:int"/>
+
+                            <xs:element
+                                    name="rating"
+                                    type="xs:double"/>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+                </xs:element>
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
 
 </xs:schema>
