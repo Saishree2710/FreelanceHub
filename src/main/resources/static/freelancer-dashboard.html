@@ -8,11 +8,119 @@
     <title>Freelancer Dashboard - FreelanceHub</title>
 
     <link rel="stylesheet" href="/style.css?v=4">
+
+    <style>
+
+        .content-section {
+            display: none;
+            padding: 60px 8%;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .project-skills {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .project-budget {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .apply-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            background: #111;
+            color: white;
+        }
+
+        .apply-btn:hover {
+            opacity: 0.85;
+        }
+
+        .back-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #eee;
+            margin-bottom: 25px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            max-width: 650px;
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-row:last-child {
+            border-bottom: none;
+        }
+
+        .profile-label {
+            font-weight: 600;
+        }
+
+        .profile-value {
+            text-align: right;
+            color: #555;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
     <nav class="navbar">
 
         <div class="logo">
@@ -20,23 +128,47 @@
         </div>
 
         <div class="nav-links">
-            <a href="freelancer-dashboard.html">Dashboard</a>
-            <a href="#">Find Projects</a>
-            <a href="#">My Applications</a>
-            <a href="#">Messages</a>
+
+            <a href="#"
+               onclick="showDashboard(); return false;">
+                Dashboard
+            </a>
+
+            <a href="#"
+               onclick="findProjects(); return false;">
+                Find Projects
+            </a>
+
+            <a href="#"
+               onclick="viewApplications(); return false;">
+                My Applications
+            </a>
+
+            <a href="#"
+               onclick="viewProfile(); return false;">
+                My Profile
+            </a>
+
         </div>
 
         <div class="nav-buttons">
-            <button class="login-btn" onclick="logout()">
+
+            <button class="login-btn"
+                    onclick="logout()">
                 Logout
             </button>
+
         </div>
 
     </nav>
 
 
-    <!-- Dashboard Hero -->
-    <section class="dashboard-hero">
+    <!-- =========================
+         DASHBOARD HERO
+    ========================== -->
+
+    <section class="dashboard-hero"
+             id="dashboardHero">
 
         <div class="dashboard-content">
 
@@ -59,8 +191,12 @@
     </section>
 
 
-    <!-- Dashboard Section -->
-    <section class="dashboard-section">
+    <!-- =========================
+         DASHBOARD CARDS
+    ========================== -->
+
+    <section class="dashboard-section"
+             id="dashboardSection">
 
         <div class="section-heading">
 
@@ -72,10 +208,10 @@
 
         </div>
 
-
         <div class="dashboard-container">
 
-            <!-- Find Projects -->
+            <!-- FIND PROJECTS -->
+
             <div class="dashboard-card">
 
                 <div class="dashboard-icon">
@@ -91,14 +227,18 @@
                     experience and interests.
                 </p>
 
-                <button class="primary-btn" onclick="findProjects()">
+                <button class="primary-btn"
+                        onclick="findProjects()">
+
                     Find Projects →
+
                 </button>
 
             </div>
 
 
-            <!-- My Applications -->
+            <!-- APPLICATIONS -->
+
             <div class="dashboard-card">
 
                 <div class="dashboard-icon">
@@ -114,14 +254,18 @@
                     and manage your freelance opportunities.
                 </p>
 
-                <button class="secondary-btn" onclick="viewApplications()">
+                <button class="secondary-btn"
+                        onclick="viewApplications()">
+
                     View Applications →
+
                 </button>
 
             </div>
 
 
-            <!-- My Profile -->
+            <!-- PROFILE -->
+
             <div class="dashboard-card">
 
                 <div class="dashboard-icon">
@@ -137,8 +281,11 @@
                     to attract better opportunities.
                 </p>
 
-                <button class="secondary-btn" onclick="viewProfile()">
+                <button class="secondary-btn"
+                        onclick="viewProfile()">
+
                     View Profile →
+
                 </button>
 
             </div>
@@ -148,7 +295,205 @@
     </section>
 
 
-    <!-- Footer -->
+    <!-- =========================
+         FIND PROJECTS
+    ========================== -->
+
+    <section class="content-section"
+             id="projectsSection">
+
+        <button class="back-btn"
+                onclick="showDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <div class="section-heading">
+
+            <p>AVAILABLE WORK</p>
+
+            <h2>
+                Find Projects
+            </h2>
+
+        </div>
+
+        <div id="projectsMessage"
+             class="message">
+
+            Loading projects...
+
+        </div>
+
+        <div class="projects-grid"
+             id="projectsGrid">
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MY APPLICATIONS
+    ========================== -->
+
+    <section class="content-section"
+             id="applicationsSection">
+
+        <button class="back-btn"
+                onclick="showDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <div class="section-heading">
+
+            <p>YOUR WORK</p>
+
+            <h2>
+                My Applications
+            </h2>
+
+        </div>
+
+        <div id="applicationsMessage"
+             class="message">
+
+            Loading applications...
+
+        </div>
+
+        <div class="projects-grid"
+             id="applicationsGrid">
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MY PROFILE
+    ========================== -->
+
+    <section class="content-section"
+             id="profileSection">
+
+        <button class="back-btn"
+                onclick="showDashboard()">
+
+            ← Back to Dashboard
+
+        </button>
+
+        <div class="section-heading">
+
+            <p>YOUR PROFILE</p>
+
+            <h2>
+                My Profile
+            </h2>
+
+        </div>
+
+        <div id="profileMessage"
+             class="message">
+
+            Loading profile...
+
+        </div>
+
+        <div class="profile-card"
+             id="profileCard"
+             style="display: none;">
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Name
+                </span>
+
+                <span class="profile-value"
+                      id="profileName">
+                </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Email
+                </span>
+
+                <span class="profile-value"
+                      id="profileEmail">
+                </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Role
+                </span>
+
+                <span class="profile-value"
+                      id="profileRole">
+                </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Skills
+                </span>
+
+                <span class="profile-value"
+                      id="profileSkills">
+                </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Experience
+                </span>
+
+                <span class="profile-value"
+                      id="profileExperience">
+                </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span class="profile-label">
+                    Rating
+                </span>
+
+                <span class="profile-value"
+                      id="profileRating">
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
         <div class="logo">
@@ -162,35 +507,525 @@
     </footer>
 
 
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script>
 
-        function findProjects() {
 
-            alert("Find Projects feature coming next!");
+        // =========================
+        // SHOW DASHBOARD
+        // =========================
 
+        function showDashboard() {
+
+            document.getElementById("dashboardHero")
+                .style.display = "";
+
+            document.getElementById("dashboardSection")
+                .style.display = "";
+
+            document.getElementById("projectsSection")
+                .classList.remove("active");
+
+            document.getElementById("applicationsSection")
+                .classList.remove("active");
+
+            document.getElementById("profileSection")
+                .classList.remove("active");
         }
 
 
-        function viewApplications() {
+        // =========================
+        // FIND PROJECTS
+        // =========================
 
-            alert("My Applications feature coming next!");
+        async function findProjects() {
 
+            hideDashboard();
+
+            document.getElementById("projectsSection")
+                .classList.add("active");
+
+            const grid =
+                document.getElementById("projectsGrid");
+
+            const message =
+                document.getElementById("projectsMessage");
+
+            grid.innerHTML = "";
+
+            message.textContent =
+                "Loading projects...";
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/freelancer/projects"
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load projects."
+                    );
+                }
+
+                const projects =
+                    await response.json();
+
+                if (projects.length === 0) {
+
+                    message.textContent =
+                        "No projects available.";
+
+                    return;
+                }
+
+                message.textContent =
+                    projects.length +
+                    " project(s) available.";
+
+                projects.forEach(function (project) {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "project-card";
+
+                    card.innerHTML = `
+
+                        <h3>
+                            ${escapeHtml(project.title)}
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(project.description)}
+                        </p>
+
+                        <div class="project-skills">
+
+                            <strong>
+                                Skills:
+                            </strong>
+
+                            ${escapeHtml(
+                                project.requiredSkills
+                            )}
+
+                        </div>
+
+                        <div class="project-budget">
+
+                            Budget:
+                            ₹${project.budget}
+
+                        </div>
+
+                        <button
+                            class="apply-btn"
+                            onclick="applyForProject(${project.id})">
+
+                            Apply
+
+                        </button>
+
+                    `;
+
+                    grid.appendChild(card);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Error loading projects: " +
+                    error.message;
+            }
         }
 
 
-        function viewProfile() {
+        // =========================
+        // APPLY FOR PROJECT
+        // =========================
 
-            alert("My Profile feature coming next!");
+        async function applyForProject(projectId) {
 
+            const freelancerId =
+                localStorage.getItem("userId");
+
+            if (!freelancerId) {
+
+                alert(
+                    "Please login again."
+                );
+
+                window.location.href =
+                    "index.html";
+
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/freelancer/applications",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                projectId:
+                                    Number(projectId),
+
+                                freelancerId:
+                                    Number(freelancerId),
+
+                                status:
+                                    "PENDING"
+
+                            })
+                        }
+                    );
+
+                const result =
+                    await response.text();
+
+                if (!response.ok) {
+
+                    alert(result);
+
+                    return;
+                }
+
+                alert(
+                    "Application submitted successfully!"
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Error submitting application."
+                );
+            }
         }
 
+
+        // =========================
+        // MY APPLICATIONS
+        // =========================
+
+        async function viewApplications() {
+
+            hideDashboard();
+
+            document.getElementById("applicationsSection")
+                .classList.add("active");
+
+            const freelancerId =
+                localStorage.getItem("userId");
+
+            const grid =
+                document.getElementById("applicationsGrid");
+
+            const message =
+                document.getElementById("applicationsMessage");
+
+            grid.innerHTML = "";
+
+            message.textContent =
+                "Loading applications...";
+
+            if (!freelancerId) {
+
+                message.textContent =
+                    "Please login again.";
+
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/freelancer/applications/${freelancerId}`
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load applications."
+                    );
+                }
+
+                const applications =
+                    await response.json();
+
+                if (applications.length === 0) {
+
+                    message.textContent =
+                        "You haven't applied to any projects yet.";
+
+                    return;
+                }
+
+                const projectsResponse =
+                    await fetch(
+                        "/api/freelancer/projects"
+                    );
+
+                const projects =
+                    await projectsResponse.json();
+
+                message.textContent =
+                    applications.length +
+                    " application(s)";
+
+                applications.forEach(function (application) {
+
+                    const project =
+                        projects.find(
+                            p =>
+                                p.id ===
+                                application.projectId
+                        );
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "project-card";
+
+                    card.innerHTML = `
+
+                        <h3>
+                            ${escapeHtml(
+                                project
+                                    ? project.title
+                                    : "Project"
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(
+                                project
+                                    ? project.description
+                                    : ""
+                            )}
+                        </p>
+
+                        <div class="project-skills">
+
+                            <strong>
+                                Skills:
+                            </strong>
+
+                            ${escapeHtml(
+                                project
+                                    ? project.requiredSkills
+                                    : ""
+                            )}
+
+                        </div>
+
+                        <div class="project-budget">
+
+                            Budget:
+                            ₹${project
+                                ? project.budget
+                                : "N/A"}
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Status:
+                            </strong>
+
+                            ${escapeHtml(
+                                application.status
+                            )}
+
+                        </div>
+
+                    `;
+
+                    grid.appendChild(card);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Error loading applications: " +
+                    error.message;
+            }
+        }
+
+
+        // =========================
+        // MY PROFILE
+        // =========================
+
+        async function viewProfile() {
+
+            hideDashboard();
+
+            document.getElementById("profileSection")
+                .classList.add("active");
+
+            const freelancerId =
+                localStorage.getItem("userId");
+
+            const message =
+                document.getElementById("profileMessage");
+
+            const profileCard =
+                document.getElementById("profileCard");
+
+            profileCard.style.display = "none";
+
+            message.textContent =
+                "Loading profile...";
+
+            if (!freelancerId) {
+
+                message.textContent =
+                    "User session not found. Please login again.";
+
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/freelancer/profile/${freelancerId}`
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load profile."
+                    );
+                }
+
+                const user =
+                    await response.json();
+
+                document.getElementById("profileName")
+                    .textContent =
+                    user.name || "Not provided";
+
+                document.getElementById("profileEmail")
+                    .textContent =
+                    user.email || "Not provided";
+
+                document.getElementById("profileRole")
+                    .textContent =
+                    user.role || "Not provided";
+
+                document.getElementById("profileSkills")
+                    .textContent =
+                    user.skills || "Not provided";
+
+                document.getElementById("profileExperience")
+                    .textContent =
+                    (user.experience ?? 0) +
+                    " years";
+
+                document.getElementById("profileRating")
+                    .textContent =
+                    user.rating ?? 0;
+
+                message.textContent = "";
+
+                profileCard.style.display = "block";
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Error loading profile: " +
+                    error.message;
+            }
+        }
+
+
+        // =========================
+        // HIDE DASHBOARD
+        // =========================
+
+        function hideDashboard() {
+
+            document.getElementById("dashboardHero")
+                .style.display = "none";
+
+            document.getElementById("dashboardSection")
+                .style.display = "none";
+
+            document.getElementById("projectsSection")
+                .classList.remove("active");
+
+            document.getElementById("applicationsSection")
+                .classList.remove("active");
+
+            document.getElementById("profileSection")
+                .classList.remove("active");
+        }
+
+
+        // =========================
+        // LOGOUT
+        // =========================
 
         function logout() {
 
             localStorage.clear();
 
-            window.location.href = "index.html";
+            window.location.href =
+                "index.html";
+        }
 
+
+        // =========================
+        // ESCAPE HTML
+        // =========================
+
+        function escapeHtml(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
 
     </script>
